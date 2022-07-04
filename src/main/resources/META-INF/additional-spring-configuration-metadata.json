@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.jpa.dhow-sql",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.dhow-sql."
+  }
+] }
