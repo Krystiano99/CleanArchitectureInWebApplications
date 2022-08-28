@@ -1,24 +1,25 @@
 package com.umcs.barbershop.domain.model;
 
+import java.util.UUID;
+
 public class Service {
-    private int id;
+    private UUID id;
     private String name;
     private int price;
 
-    public Service(int id, String name, int price) {
+    public Service(UUID id, String name, int price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }

@@ -1,42 +1,54 @@
 package com.umcs.barbershop.infrastructure.controller;
 
-import com.umcs.barbershop.infrastructure.entity.UserEntity;
-import com.umcs.barbershop.infrastructure.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.umcs.barbershop.domain.model.User;
+
+import com.umcs.barbershop.domain.port.service.UserServicePort;
+import com.umcs.barbershop.infrastructure.dto.UserDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    private final UserService userService;
+    private final UserServicePort userServicePort;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+//    @Autowired
+    public UserController(UserServicePort userServicePort) {
+        this.userServicePort = userServicePort;
     }
 
     @GetMapping
-    public List<UserEntity> getUsers() {
-        return userService.getUsers();
+    public List<User> getUsers() {
+        return userServicePort.getUsers();
     }
 
     @PostMapping
-    public void registerNewUser(@RequestBody UserEntity userEntity) {
-        userService.addNewUser(userEntity);
+    public User addUser(@RequestBody UserDto userDto) {
+        return userServicePort.addUser(
+                new User(null,
+                        userDto.getFirstName(),
+                        userDto.getLastName(),
+                        userDto.getLogin(),
+                        userDto.getPassword(),
+                        userDto.getEmail(),
+                        userDto.getPhoneNumber(),
+                        userDto.getRole())
+        );
     }
 
     @DeleteMapping(path = "{userId}")
-    public void deleteUser(@PathVariable("userId") Long userId) {
-        userService.deleteUser(userId);
+    public void deleteUser(@PathVariable("userId") UUID userId) {
+        userServicePort.deleteUserById(userId);
     }
 
-    @PutMapping(path = "{userId}")
-    public void updateUser(
-            @PathVariable("userId") Long userId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email) {
-        userService.updateUser(userId, name, email);
-    }
+//    @PutMapping(path = "{userId}")
+//    public void updateUser(
+//            @PathVariable("userId") Long userId,
+//            @RequestParam(required = false) String name,
+//            @RequestParam(required = false) String email) {
+//        userServicePort.updateUser(userId, name, email);
+//    }
+
 }
