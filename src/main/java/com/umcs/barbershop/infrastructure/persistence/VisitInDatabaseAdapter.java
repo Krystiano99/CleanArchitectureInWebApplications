@@ -1,10 +1,10 @@
 package com.umcs.barbershop.infrastructure.persistence;
 
-import com.umcs.barbershop.domain.model.Service;
+import com.umcs.barbershop.domain.model.Haircut;
 import com.umcs.barbershop.domain.model.User;
 import com.umcs.barbershop.domain.model.Visit;
-import com.umcs.barbershop.domain.port.repository.VisitRepositoryPort;
-import com.umcs.barbershop.infrastructure.persistence.entity.ServiceEntity;
+import com.umcs.barbershop.domain.port.driving.VisitRepositoryPort;
+import com.umcs.barbershop.infrastructure.persistence.entity.HaircutEntity;
 import com.umcs.barbershop.infrastructure.persistence.entity.UserEntity;
 import com.umcs.barbershop.infrastructure.persistence.entity.VisitEntity;
 import com.umcs.barbershop.infrastructure.persistence.repository.VisitRepository;
@@ -29,7 +29,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                         visitEntity.getId(),
                         visitEntity.getCreatedDate(),
                         visitEntity.getVisitDate(),
-                        serviceEntityToService(visitEntity.getServiceEntity()),
+                        serviceEntityToService(visitEntity.getHaircutEntity()),
                         customerEntityToUser(visitEntity.getCustomerEntity()),
                         barberEntityToUser(visitEntity.getUserEntity())
                 ))
@@ -49,7 +49,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         return new Visit(result.getId(),
                 result.getCreatedDate(),
                 result.getVisitDate(),
-                serviceEntityToService(result.getServiceEntity()),
+                serviceEntityToService(result.getHaircutEntity()),
                 customerEntityToUser(result.getCustomerEntity()),
                 barberEntityToUser(result.getUserEntity())
         );
@@ -60,8 +60,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 barber.getId(),
                 barber.getFirstName(),
                 barber.getLastName(),
-                barber.getLogin(),
-                barber.getPassword(),
                 barber.getPhoneNumber(),
                 barber.getEmail(),
                 barber.getRole()
@@ -73,8 +71,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 customer.getId(),
                 customer.getFirstName(),
                 customer.getLastName(),
-                customer.getLogin(),
-                customer.getPassword(),
                 customer.getPhoneNumber(),
                 customer.getEmail(),
                 customer.getRole()
@@ -86,8 +82,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 customerEntity.getId(),
                 customerEntity.getFirstName(),
                 customerEntity.getLastName(),
-                customerEntity.getLogin(),
-                customerEntity.getPassword(),
                 customerEntity.getPhoneNumber(),
                 customerEntity.getEmail(),
                 customerEntity.getRole()
@@ -99,8 +93,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 barberEntity.getId(),
                 barberEntity.getFirstName(),
                 barberEntity.getLastName(),
-                barberEntity.getLogin(),
-                barberEntity.getPassword(),
                 barberEntity.getPhoneNumber(),
                 barberEntity.getEmail(),
                 barberEntity.getRole()
@@ -118,7 +110,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         return new Visit(result.get().getId(),
                 result.get().getCreatedDate(),
                 result.get().getVisitDate(),
-                serviceEntityToService(result.get().getServiceEntity()),
+                serviceEntityToService(result.get().getHaircutEntity()),
                 customerEntityToUser(result.get().getCustomerEntity()),
                 barberEntityToUser(result.get().getUserEntity())
                 );
@@ -133,7 +125,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         return new Visit(result.get().getId(),
                 result.get().getCreatedDate(),
                 result.get().getVisitDate(),
-                serviceEntityToService(result.get().getServiceEntity()),
+                serviceEntityToService(result.get().getHaircutEntity()),
                 customerEntityToUser(result.get().getCustomerEntity()),
                 barberEntityToUser(result.get().getUserEntity())
                 );
@@ -146,25 +138,25 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         return new Visit(visitToDelete.getId(),
                 visitToDelete.getCreatedDate(),
                 visitToDelete.getVisitDate(),
-                serviceEntityToService(visitToDelete.getServiceEntity()),
+                serviceEntityToService(visitToDelete.getHaircutEntity()),
                 customerEntityToUser(visitToDelete.getCustomerEntity()),
                 barberEntityToUser(visitToDelete.getUserEntity())
                 );
     }
 
-    private Service serviceEntityToService(ServiceEntity serviceEntity) {
-        return new Service(
-                serviceEntity.getId(),
-                serviceEntity.getName(),
-                serviceEntity.getPrice()
+    private Haircut serviceEntityToService(HaircutEntity haircutEntity) {
+        return new Haircut(
+                haircutEntity.getId(),
+                haircutEntity.getName(),
+                haircutEntity.getPrice()
         );
     }
 
-    private ServiceEntity serviceToServiceEntity(Service service) {
-        return new ServiceEntity(
-                service.getId(),
-                service.getName(),
-                service.getPrice()
+    private HaircutEntity serviceToServiceEntity(Haircut haircut) {
+        return new HaircutEntity(
+                haircut.getId(),
+                haircut.getName(),
+                haircut.getPrice()
         );
     }
 

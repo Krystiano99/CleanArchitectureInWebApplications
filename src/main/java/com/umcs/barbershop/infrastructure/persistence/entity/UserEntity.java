@@ -21,41 +21,7 @@ public class UserEntity {
 
     private String firstName;
     private String lastName;
-    private String login;
-    private String password;
     private String email;
     private String phoneNumber;
     private String role;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getRole() {
-        return role;
-    }
 }

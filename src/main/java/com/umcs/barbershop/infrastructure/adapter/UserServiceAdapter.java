@@ -1,7 +1,7 @@
 package com.umcs.barbershop.infrastructure.adapter;
 
 import com.umcs.barbershop.domain.model.User;
-import com.umcs.barbershop.domain.port.service.UserServicePort;
+import com.umcs.barbershop.domain.port.driven.UserServicePort;
 import com.umcs.barbershop.domain.usecase.UserService;
 
 
@@ -28,6 +28,10 @@ public class UserServiceAdapter implements UserServicePort {
     @Override
     public User getUserById(UUID id) {
         return userService.getUserById(id);
+    }
+    @Override
+    public List<User> getUsersByRole(String role) {
+        return userService.getUsersByRole(role);
     }
 
     @Override

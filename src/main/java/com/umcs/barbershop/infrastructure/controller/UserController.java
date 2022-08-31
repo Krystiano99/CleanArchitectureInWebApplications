@@ -2,7 +2,7 @@ package com.umcs.barbershop.infrastructure.controller;
 
 import com.umcs.barbershop.domain.model.User;
 
-import com.umcs.barbershop.domain.port.service.UserServicePort;
+import com.umcs.barbershop.domain.port.driven.UserServicePort;
 import com.umcs.barbershop.infrastructure.dto.UserDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/user")
 public class UserController {
     private final UserServicePort userServicePort;
@@ -23,6 +24,14 @@ public class UserController {
     public List<User> getUsers() {
         return userServicePort.getUsers();
     }
+    @GetMapping(path = "{userId}")
+    public User getUserById(@PathVariable("userId") UUID userId) {
+        return userServicePort.getUserById(userId);
+    }
+    @GetMapping(path = "/role/{role}")
+    public List<User> getUsersByRole(@PathVariable("role") String role) {
+        return userServicePort.getUsersByRole(role);
+    }
 
     @PostMapping
     public User addUser(@RequestBody UserDto userDto) {
@@ -30,8 +39,6 @@ public class UserController {
                 new User(null,
                         userDto.getFirstName(),
                         userDto.getLastName(),
-                        userDto.getLogin(),
-                        userDto.getPassword(),
                         userDto.getEmail(),
                         userDto.getPhoneNumber(),
                         userDto.getRole())
@@ -43,12 +50,9 @@ public class UserController {
         userServicePort.deleteUserById(userId);
     }
 
-//    @PutMapping(path = "{userId}")
-//    public void updateUser(
-//            @PathVariable("userId") Long userId,
-//            @RequestParam(required = false) String name,
-//            @RequestParam(required = false) String email) {
-//        userServicePort.updateUser(userId, name, email);
-//    }
+    @PatchMapping("{userId}")
+    public User updateUser(@PathVariable UUID userId, @RequestBody UserDto userDto) {
+        return userServicePort.updateUser(userId, new User(userId, userDto.getFirstName(), userDto.getLastName(), userDto.getPhoneNumber(), userDto.getEmail(), userDto.getRole()));
+    }
 
 }

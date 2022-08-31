@@ -1,9 +1,10 @@
 package com.umcs.barbershop.infrastructure.adapter;
 
 import com.umcs.barbershop.domain.model.Visit;
-import com.umcs.barbershop.domain.port.service.VisitServicePort;
+import com.umcs.barbershop.domain.port.driven.VisitServicePort;
 import com.umcs.barbershop.domain.usecase.VisitService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ public class VisitServiceAdapter implements VisitServicePort {
 
     @Override
     public Visit getVisitById(UUID id) {
-        return null;
+        return visitService.getVisitById(id);
     }
 
     @Override
@@ -29,19 +30,20 @@ public class VisitServiceAdapter implements VisitServicePort {
         return visitService.addVisit(visit);
     }
 
-//    @Override
-//    public Visit updateVisit(UUID id, Visit visit) {
-//        return null;
-//    }
 
     @Override
     public Visit deleteVisitById(UUID id) {
-        return null;
+        return visitService.deleteVisitById(id);
     }
 
     @Override
     public Visit getVisitByUserId(UUID id) {
-        return null;
+        return visitService.getVisitByUserId(id);
+    }
+
+    @Override
+    public Visit scheduleVisit(UUID customerId, UUID barberId, UUID serviceId, Date visitDate) {
+        return visitService.scheduleVisit(customerId, barberId, serviceId, visitDate);
     }
 
 }

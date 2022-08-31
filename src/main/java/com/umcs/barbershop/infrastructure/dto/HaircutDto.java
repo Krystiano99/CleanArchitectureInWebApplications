@@ -5,7 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class ServiceDto {
+public class HaircutDto {
     String name;
     int price;
 }

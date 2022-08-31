@@ -1,7 +1,7 @@
 package com.umcs.barbershop.infrastructure.controller;
 
 import com.umcs.barbershop.domain.model.Visit;
-import com.umcs.barbershop.domain.port.service.VisitServicePort;
+import com.umcs.barbershop.domain.port.driven.VisitServicePort;
 import com.umcs.barbershop.infrastructure.dto.VisitDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +22,18 @@ public class VisitController {
     public List<Visit> getVisits() {
         return visitServicePort.getVisits();
     }
+
+    @GetMapping(path = "{id}")
+    public Visit getVisitById(@PathVariable("id") UUID id) {
+        return visitServicePort.getVisitById(id);
+    }
     @PostMapping
     public Visit addVisit(@RequestBody VisitDto visitDto) {
         return visitServicePort.addVisit(
                 new Visit(null,
                         visitDto.getCreatedDate(),
                         visitDto.getVisitDate(),
-                        visitDto.getService(),
+                        visitDto.getHaircut(),
                         visitDto.getBarber(),
                         visitDto.getCustomer())
         );
@@ -39,12 +44,5 @@ public class VisitController {
         visitServicePort.deleteVisitById(id);
     }
 
-//    @PutMapping(path = "{userId}")
-//    public void updateUser(
-//            @PathVariable("userId") Long userId,
-//            @RequestParam(required = false) String name,
-//            @RequestParam(required = false) String email) {
-//        userServicePort.updateUser(userId, name, email);
-//    }
 
 }

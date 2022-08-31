@@ -1,22 +1,21 @@
 package com.umcs.barbershop.domain.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
 public class Visit {
     private UUID id;
     private Date createdDate;
-    private LocalDate visitDate;
-    private Service service;
+    private Date visitDate;
+    private Haircut haircut;
     private User barber;
     private User customer;
 
-    public Visit(UUID id, Date createdDate, LocalDate visitDate, Service service, User barber, User customer) {
+    public Visit(UUID id, Date createdDate, Date visitDate, Haircut haircut, User barber, User customer) {
         this.id = id;
         this.createdDate = createdDate;
         this.visitDate = visitDate;
-        this.service = service;
+        this.haircut = haircut;
         this.barber = barber;
         this.customer = customer;
     }
@@ -37,20 +36,20 @@ public class Visit {
         this.createdDate = createdDate;
     }
 
-    public LocalDate getVisitDate() {
+    public Date getVisitDate() {
         return visitDate;
     }
 
-    public void setVisitDate(LocalDate visitDate) {
+    public void setVisitDate(Date visitDate) {
         this.visitDate = visitDate;
     }
 
-    public Service getService() {
-        return service;
+    public Haircut getService() {
+        return haircut;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setService(Haircut haircut) {
+        this.haircut = haircut;
     }
 
     public User getBarber() {

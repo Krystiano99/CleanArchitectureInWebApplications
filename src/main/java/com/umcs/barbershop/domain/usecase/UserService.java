@@ -1,7 +1,7 @@
 package com.umcs.barbershop.domain.usecase;
 
 import com.umcs.barbershop.domain.model.User;
-import com.umcs.barbershop.domain.port.repository.UserRepositoryPort;
+import com.umcs.barbershop.domain.port.driving.UserRepositoryPort;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,8 +20,8 @@ public class UserService {
     }
 
     public List<User> getUsersByRole(String role) {
-        List<User> users = getUsers();
-        return users.stream()
+        return getUsers()
+                .stream()
                 .filter(user->user.getRole().contains(role))
                 .collect(Collectors.toList());
     }

@@ -1,9 +1,11 @@
 package com.umcs.barbershop.infrastructure.persistence;
 
-import com.umcs.barbershop.domain.port.repository.ServiceRepositoryPort;
-import com.umcs.barbershop.domain.port.repository.UserRepositoryPort;
-import com.umcs.barbershop.domain.port.repository.VisitRepositoryPort;
-import com.umcs.barbershop.infrastructure.persistence.repository.ServiceRepository;
+import com.umcs.barbershop.domain.port.driving.HaircutRepositoryPort;
+import com.umcs.barbershop.domain.port.driving.OpinionRepositoryPort;
+import com.umcs.barbershop.domain.port.driving.UserRepositoryPort;
+import com.umcs.barbershop.domain.port.driving.VisitRepositoryPort;
+import com.umcs.barbershop.infrastructure.persistence.repository.HaircutRepository;
+import com.umcs.barbershop.infrastructure.persistence.repository.OpinionRepository;
 import com.umcs.barbershop.infrastructure.persistence.repository.UserRepository;
 import com.umcs.barbershop.infrastructure.persistence.repository.VisitRepository;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +19,18 @@ public class PersistenceInDatabaseConfiguration {
     }
 
     @Bean
-    public ServiceRepositoryPort serviceRepositoryPort(ServiceRepository serviceRepository) {
-        return new ServiceInDatabaseAdapter(serviceRepository);
+    public HaircutRepositoryPort serviceRepositoryPort(HaircutRepository haircutRepository) {
+        return new HaircutInDatabaseAdapter(haircutRepository);
     }
 
     @Bean
     public VisitRepositoryPort visitRepositoryPort(VisitRepository visitRepository) {
         return new VisitInDatabaseAdapter(visitRepository);
+    }
+
+    @Bean
+    public OpinionRepositoryPort opinionRepositoryPort(OpinionRepository opinionRepository) {
+        return new OpinionInDatabaseAdapter(opinionRepository);
     }
 }
 

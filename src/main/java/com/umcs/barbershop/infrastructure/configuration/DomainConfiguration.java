@@ -1,31 +1,26 @@
 package com.umcs.barbershop.infrastructure.configuration;
 
+import com.umcs.barbershop.domain.port.driven.OpinionServicePort;
+import com.umcs.barbershop.domain.port.driving.HaircutRepositoryPort;
+import com.umcs.barbershop.domain.port.driving.OpinionRepositoryPort;
+import com.umcs.barbershop.domain.port.driving.UserRepositoryPort;
 
+import com.umcs.barbershop.domain.port.driving.VisitRepositoryPort;
+import com.umcs.barbershop.domain.port.driven.HaircutServicePort;
+import com.umcs.barbershop.domain.port.driven.UserServicePort;
 
-import com.umcs.barbershop.domain.port.repository.ServiceRepositoryPort;
-import com.umcs.barbershop.domain.port.repository.UserRepositoryPort;
-
-import com.umcs.barbershop.domain.port.repository.VisitRepositoryPort;
-import com.umcs.barbershop.domain.port.service.ServiceServicePort;
-import com.umcs.barbershop.domain.port.service.UserServicePort;
-
-import com.umcs.barbershop.domain.port.service.VisitServicePort;
-import com.umcs.barbershop.domain.usecase.ServiceService;
+import com.umcs.barbershop.domain.port.driven.VisitServicePort;
+import com.umcs.barbershop.domain.usecase.HaircutService;
+import com.umcs.barbershop.domain.usecase.OpinionService;
 import com.umcs.barbershop.domain.usecase.UserService;
 
 import com.umcs.barbershop.domain.usecase.VisitService;
-import com.umcs.barbershop.infrastructure.adapter.ServiceServiceAdapter;
+import com.umcs.barbershop.infrastructure.adapter.HaircutServiceAdapter;
+import com.umcs.barbershop.infrastructure.adapter.OpinionServiceAdapter;
 import com.umcs.barbershop.infrastructure.adapter.UserServiceAdapter;
 
 import com.umcs.barbershop.infrastructure.adapter.VisitServiceAdapter;
 
-import com.umcs.barbershop.infrastructure.persistence.ServiceInDatabaseAdapter;
-import com.umcs.barbershop.infrastructure.persistence.UserInDatabaseAdapter;
-import com.umcs.barbershop.infrastructure.persistence.VisitInDatabaseAdapter;
-
-import com.umcs.barbershop.infrastructure.persistence.repository.ServiceRepository;
-import com.umcs.barbershop.infrastructure.persistence.repository.UserRepository;
-import com.umcs.barbershop.infrastructure.persistence.repository.VisitRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -47,33 +42,27 @@ public class DomainConfiguration {
     }
 
     @Bean
-    public VisitService visitService(VisitRepositoryPort visitRepositoryPort, ServiceService serviceService, UserService barberService, UserService customerService) {
-        return new VisitService(visitRepositoryPort, serviceService, barberService, customerService);
+    public VisitService visitService(VisitRepositoryPort visitRepositoryPort, HaircutService haircutService, UserService userService) {
+        return new VisitService(visitRepositoryPort, haircutService, userService);
     }
 
     @Bean
-    public ServiceServicePort serviceServicePort(ServiceService serviceService) {
-        return new ServiceServiceAdapter(serviceService);
+    public HaircutServicePort haircutServicePort(HaircutService haircutService) {
+        return new HaircutServiceAdapter(haircutService);
     }
 
     @Bean
-    public ServiceService serviceService(ServiceRepositoryPort serviceRepositoryPort) {
-        return new ServiceService(serviceRepositoryPort);
+    public HaircutService haircutService(HaircutRepositoryPort haircutRepositoryPort) {
+        return new HaircutService(haircutRepositoryPort);
     }
 
-///////////////////
-//    @Bean
-//    public UserRepositoryPort userRepositoryPort(UserRepository userRepository) {
-//        return new UserInDatabaseAdapter(userRepository);
-//    }
-//
-//    @Bean
-//    public ServiceRepositoryPort serviceRepositoryPort(ServiceRepository serviceRepository) {
-//        return new ServiceInDatabaseAdapter(serviceRepository);
-//    }
+    @Bean
+    public OpinionServicePort opinionServicePort(OpinionService opinionService) {
+        return new OpinionServiceAdapter(opinionService);
+    }
 
-//    @Bean
-//    public VisitRepositoryPort visitRepositoryPort(VisitRepository visitRepository) {
-//        return new VisitInDatabaseAdapter(visitRepository);
-//    }
+    @Bean
+    public OpinionService opinionService(OpinionRepositoryPort opinionRepositoryPort) {
+        return new OpinionService(opinionRepositoryPort);
+    }
 }

@@ -1,4 +1,4 @@
-package com.umcs.barbershop.domain.port.repository;
+package com.umcs.barbershop.domain.port.driving;
 
 import com.umcs.barbershop.domain.model.Visit;
 
@@ -7,7 +7,8 @@ import java.util.UUID;
 
 public interface VisitRepositoryPort {
     List<Visit> findAll();
-    Visit addVisit(Visit visit);
     Visit getVisitById(UUID id);
     Visit deleteVisitById(UUID id);
+    Visit addVisit(Visit visit);
+    Visit getVisitByUserId(UUID id);
 }

@@ -1,4 +1,4 @@
-package com.umcs.barbershop.domain.port.service;
+package com.umcs.barbershop.domain.port.driven;
 
 import com.umcs.barbershop.domain.model.User;
 
@@ -9,6 +9,9 @@ public interface UserServicePort {
     List<User> getUsers();
     User getUserById(UUID id);
     User addUser(User user);
+
+    List<User> getUsersByRole(String role);
+
     User updateUser(UUID id, User user);
     User deleteUserById(UUID id);
 }

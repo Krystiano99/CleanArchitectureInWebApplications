@@ -2,12 +2,12 @@ package com.umcs.barbershop.domain.model;
 
 import java.util.UUID;
 
-public class Service {
+public class Haircut {
     private UUID id;
     private String name;
     private int price;
 
-    public Service(UUID id, String name, int price) {
+    public Haircut(UUID id, String name, int price) {
         this.id = id;
         this.name = name;
         this.price = price;
