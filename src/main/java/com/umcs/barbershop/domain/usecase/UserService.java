@@ -19,13 +19,12 @@ public class UserService {
         return this.userRepositoryPort.findAll();
     }
 
-    public List<User> getUsersByRole(String role) {
+    public List<User> getBarbers() {
         return getUsers()
                 .stream()
-                .filter(user->user.getRole().contains(role))
+                .filter(user->user.getRole().contains("barber"))
                 .collect(Collectors.toList());
     }
-
     public User addUser(User user) {
         return userRepositoryPort.addUser(user);
     }
@@ -41,4 +40,5 @@ public class UserService {
     public User deleteUserById(UUID id) {
         return this.userRepositoryPort.deleteUserById(id);
     }
+
 }

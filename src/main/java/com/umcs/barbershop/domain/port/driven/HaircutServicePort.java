@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface HaircutServicePort {
-    List<Haircut> getServices();
-    Haircut getServiceById(UUID id);
-    Haircut addService(Haircut haircut);
-    Haircut updateService(UUID id, Haircut haircut);
-    Haircut deleteServiceById(UUID id);
+    List<Haircut> getHaircuts();
+    Haircut addHaircut(Haircut haircut);
+    Haircut updateHaircut(UUID id, Haircut haircut);
+    Haircut deleteHaircutById(UUID id);
 }

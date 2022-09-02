@@ -6,14 +6,12 @@ import com.umcs.barbershop.infrastructure.dto.VisitDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/visit")
 public class VisitController {
     private final VisitServicePort visitServicePort;
 
-    //    @Autowired
     public VisitController(VisitServicePort visitServicePort) {
         this.visitServicePort = visitServicePort;
     }
@@ -23,25 +21,19 @@ public class VisitController {
         return visitServicePort.getVisits();
     }
 
-    @GetMapping(path = "{id}")
-    public Visit getVisitById(@PathVariable("id") UUID id) {
-        return visitServicePort.getVisitById(id);
-    }
-    @PostMapping
-    public Visit addVisit(@RequestBody VisitDto visitDto) {
-        return visitServicePort.addVisit(
-                new Visit(null,
-                        visitDto.getCreatedDate(),
-                        visitDto.getVisitDate(),
-                        visitDto.getHaircut(),
-                        visitDto.getBarber(),
-                        visitDto.getCustomer())
+    @PostMapping(path = "/schedule")
+    public Visit scheduleVisit(@RequestBody VisitDto visitDto) {
+        return visitServicePort.scheduleVisit(
+                visitDto.getCustomerId(),
+                visitDto.getBarberId(),
+                visitDto.getHaircutId(),
+                visitDto.getVisitDate()
         );
     }
 
-    @DeleteMapping(path = "{id}")
-    public void deleteVisit(@PathVariable("id") UUID id) {
-        visitServicePort.deleteVisitById(id);
+    @PostMapping(path = "/cancel")
+    public Visit cancelVisit(@RequestBody VisitDto visitDto) {
+        return visitServicePort.cancelVisit(visitDto.getId(),visitDto.getCustomerId(), visitDto.getBarberId());
     }
 
 

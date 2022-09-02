@@ -15,27 +15,22 @@ public class HaircutServiceAdapter implements HaircutServicePort {
     }
 
     @Override
-    public List<Haircut> getServices() {
+    public List<Haircut> getHaircuts() {
         return haircutService.getHaircuts();
     }
 
     @Override
-    public Haircut addService(Haircut haircut) {
+    public Haircut addHaircut(Haircut haircut) {
         return haircutService.addHaircut(haircut);
     }
 
     @Override
-    public Haircut getServiceById(UUID id) {
-        return haircutService.getHaircutById(id);
-    }
-
-    @Override
-    public Haircut updateService(UUID id, Haircut haircut) {
+    public Haircut updateHaircut(UUID id, Haircut haircut) {
         return haircutService.updateHaircut(id, haircut);
     }
 
     @Override
-    public Haircut deleteServiceById(UUID id) {
+    public Haircut deleteHaircutById(UUID id) {
         return haircutService.deleteHaircutById(id);
     }
 

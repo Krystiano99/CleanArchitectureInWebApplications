@@ -15,7 +15,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class VisitInDatabaseAdapter implements VisitRepositoryPort {
-
     private final VisitRepository visitRepository;
 
     public VisitInDatabaseAdapter(VisitRepository visitRepository) {
@@ -42,7 +41,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 visit.getId(),
                 visit.getCreatedDate(),
                 visit.getVisitDate(),
-                serviceToServiceEntity(visit.getService()),
+                serviceToServiceEntity(visit.getHaircut()),
                 customerToEntityUser(visit.getCustomer()),
                 barberToEntityUser(visit.getBarber())
         ));
@@ -99,22 +98,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         );
     }
 
-
-    public Visit getVisitByUserId(UUID id) {
-        Optional<VisitEntity> result = visitRepository.findByUserEntity_Id(id);
-
-        if (result.isEmpty()) {
-            return null;
-        }
-
-        return new Visit(result.get().getId(),
-                result.get().getCreatedDate(),
-                result.get().getVisitDate(),
-                serviceEntityToService(result.get().getHaircutEntity()),
-                customerEntityToUser(result.get().getCustomerEntity()),
-                barberEntityToUser(result.get().getUserEntity())
-                );
-    }
     public Visit getVisitById(UUID id) {
        Optional<VisitEntity> result = visitRepository.findById(id);
 

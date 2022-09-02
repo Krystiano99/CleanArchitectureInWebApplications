@@ -11,7 +11,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class UserInDatabaseAdapter implements UserRepositoryPort {
-
     private final UserRepository userRepository;
 
     public UserInDatabaseAdapter(UserRepository userRepository) {
@@ -62,6 +61,9 @@ public class UserInDatabaseAdapter implements UserRepositoryPort {
 
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setPhoneNumber(user.getPhoneNumber());
+        userToUpdate.setRole(user.getRole());
         UserEntity result = userRepository.save(userToUpdate);
 
         return new User(result.getId(), result.getFirstName(), result.getLastName(), result.getEmail(),

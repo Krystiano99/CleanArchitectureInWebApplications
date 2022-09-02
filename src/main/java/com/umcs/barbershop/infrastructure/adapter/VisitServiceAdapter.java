@@ -21,29 +21,13 @@ public class VisitServiceAdapter implements VisitServicePort {
     }
 
     @Override
-    public Visit getVisitById(UUID id) {
-        return visitService.getVisitById(id);
+    public Visit cancelVisit(UUID visitId, UUID customerId, UUID barberId) {
+        return visitService.cancelVisit(visitId, customerId, barberId);
     }
 
     @Override
-    public Visit addVisit(Visit visit) {
-        return visitService.addVisit(visit);
-    }
-
-
-    @Override
-    public Visit deleteVisitById(UUID id) {
-        return visitService.deleteVisitById(id);
-    }
-
-    @Override
-    public Visit getVisitByUserId(UUID id) {
-        return visitService.getVisitByUserId(id);
-    }
-
-    @Override
-    public Visit scheduleVisit(UUID customerId, UUID barberId, UUID serviceId, Date visitDate) {
-        return visitService.scheduleVisit(customerId, barberId, serviceId, visitDate);
+    public Visit scheduleVisit(UUID customerId, UUID barberId, UUID haircutId, Date visitDate) {
+        return visitService.scheduleVisit(customerId, barberId, haircutId, visitDate);
     }
 
 }

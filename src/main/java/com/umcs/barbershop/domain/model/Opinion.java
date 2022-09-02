@@ -5,13 +5,13 @@ import java.util.UUID;
 public class Opinion {
     private UUID id;
     private User customer;
-    private int assessment;
+    private int rate;
     private String comment;
 
-    public Opinion(UUID id, User customer, int assessment, String comment) {
+    public Opinion(UUID id, User customer, int rate, String comment) {
         this.id = id;
         this.customer = customer;
-        this.assessment = assessment;
+        this.rate = rate;
         this.comment = comment;
     }
 
@@ -31,12 +31,12 @@ public class Opinion {
         this.customer = customer;
     }
 
-    public int getAssessment() {
-        return assessment;
+    public int getRate() {
+        return rate;
     }
 
-    public void setAssessment(int assessment) {
-        this.assessment = assessment;
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     public String getComment() {

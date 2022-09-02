@@ -1,11 +1,7 @@
 package com.umcs.barbershop.infrastructure.controller;
 
-import com.umcs.barbershop.domain.model.Haircut;
 import com.umcs.barbershop.domain.model.Opinion;
-import com.umcs.barbershop.domain.model.User;
-import com.umcs.barbershop.domain.port.driven.HaircutServicePort;
 import com.umcs.barbershop.domain.port.driven.OpinionServicePort;
-import com.umcs.barbershop.infrastructure.dto.HaircutDto;
 import com.umcs.barbershop.infrastructure.dto.OpinionDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,22 +24,20 @@ public class OpinionController {
 
     @PostMapping
     public Opinion addOpinion(@RequestBody OpinionDto opinionDto) {
-        return opinionServicePort.addOpinion(
-                new Opinion(null,
-                        opinionDto.getCustomer(),
-                        opinionDto.getAssessment(),
-                        opinionDto.getComment())
-        );
-    }
-
-    @GetMapping(path = "{id}")
-    public Opinion getOpinionById(@PathVariable("id") UUID id) {
-        return opinionServicePort.getOpinionById(id);
+        return opinionServicePort.leaveOpinion(
+                        opinionDto.getCustomerId(),
+                        opinionDto.getRate(),
+                        opinionDto.getComment());
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteOpinion(@PathVariable("id") UUID id) {
         opinionServicePort.deleteOpinionById(id);
+    }
+
+    @GetMapping(path = "/average")
+    public double getAverageRating(){
+        return opinionServicePort.getAverageRating();
     }
 
 }

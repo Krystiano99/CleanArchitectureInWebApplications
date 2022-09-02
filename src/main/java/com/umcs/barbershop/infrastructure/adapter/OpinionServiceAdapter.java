@@ -21,18 +21,16 @@ public class OpinionServiceAdapter implements OpinionServicePort {
     }
 
     @Override
-    public Opinion getOpinionById(UUID id) {
-        return opinionService.getOpinionById(id);
-    }
-
-    @Override
-    public Opinion addOpinion(Opinion opinion) {
-        return opinionService.addOpinion(opinion);
+    public Opinion leaveOpinion(UUID customerId, int rate, String comment) {
+        return opinionService.leaveOpinion(customerId, rate, comment);
     }
 
     @Override
     public Opinion deleteOpinionById(UUID id) {
         return opinionService.deleteOpinionById(id);
     }
+
+    @Override
+    public double getAverageRating(){return opinionService.getAverageRating();}
 
 }

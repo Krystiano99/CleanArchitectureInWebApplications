@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public interface UserRepositoryPort {
     List<User> findAll();
-
     User addUser(User user);
     User getUserById(UUID id);
     User updateUser(UUID id, User user);

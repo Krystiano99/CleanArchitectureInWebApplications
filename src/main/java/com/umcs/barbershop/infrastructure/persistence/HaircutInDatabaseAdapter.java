@@ -12,7 +12,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class HaircutInDatabaseAdapter implements HaircutRepositoryPort {
-
     private final HaircutRepository haircutRepository;
 
     public HaircutInDatabaseAdapter(HaircutRepository haircutRepository) {

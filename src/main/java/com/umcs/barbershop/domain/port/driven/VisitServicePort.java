@@ -8,10 +8,6 @@ import java.util.UUID;
 
 public interface VisitServicePort {
     List<Visit> getVisits();
-    Visit getVisitById(UUID id);
-    Visit addVisit(Visit visit);
-    Visit deleteVisitById(UUID id);
-    Visit getVisitByUserId(UUID id);
-    Visit scheduleVisit(UUID customerId, UUID barberId, UUID serviceId, Date visitDate);
-
+    Visit cancelVisit(UUID visitId, UUID customerId, UUID barberId);
+    Visit scheduleVisit(UUID customerId, UUID barberId, UUID haircutId, Date visitDate);
 }

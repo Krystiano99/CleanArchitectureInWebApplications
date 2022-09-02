@@ -62,7 +62,7 @@ public class DomainConfiguration {
     }
 
     @Bean
-    public OpinionService opinionService(OpinionRepositoryPort opinionRepositoryPort) {
-        return new OpinionService(opinionRepositoryPort);
+    public OpinionService opinionService(OpinionRepositoryPort opinionRepositoryPort, UserService userService) {
+        return new OpinionService(opinionRepositoryPort, userService);
     }
 }

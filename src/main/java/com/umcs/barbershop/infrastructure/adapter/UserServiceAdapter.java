@@ -30,8 +30,8 @@ public class UserServiceAdapter implements UserServicePort {
         return userService.getUserById(id);
     }
     @Override
-    public List<User> getUsersByRole(String role) {
-        return userService.getUsersByRole(role);
+    public List<User> getBarbers() {
+        return userService.getBarbers();
     }
 
     @Override

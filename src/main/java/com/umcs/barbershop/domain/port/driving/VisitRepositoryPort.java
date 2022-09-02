@@ -10,5 +10,4 @@ public interface VisitRepositoryPort {
     Visit getVisitById(UUID id);
     Visit deleteVisitById(UUID id);
     Visit addVisit(Visit visit);
-    Visit getVisitByUserId(UUID id);
 }

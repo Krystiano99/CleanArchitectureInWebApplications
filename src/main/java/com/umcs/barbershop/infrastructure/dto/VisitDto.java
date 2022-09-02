@@ -1,20 +1,18 @@
 package com.umcs.barbershop.infrastructure.dto;
 
-import com.umcs.barbershop.domain.model.Haircut;
-import com.umcs.barbershop.domain.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
 import java.util.Date;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Data
 public class VisitDto {
-    Date createdDate;
+    UUID id;
+    UUID customerId;
+    UUID barberId;
+    UUID haircutId;
     Date visitDate;
-    Haircut haircut;
-    User barber;
-    User customer;
-
 }

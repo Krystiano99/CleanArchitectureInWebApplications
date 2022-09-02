@@ -9,9 +9,7 @@ public interface UserServicePort {
     List<User> getUsers();
     User getUserById(UUID id);
     User addUser(User user);
-
-    List<User> getUsersByRole(String role);
-
     User updateUser(UUID id, User user);
     User deleteUserById(UUID id);
+    List<User> getBarbers();
 }

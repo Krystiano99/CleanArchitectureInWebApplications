@@ -18,5 +18,5 @@ public class OpinionEntity {
     @OneToOne
     private UserEntity customerEntity;
     private String comment;
-    private int assessment;
+    private int rate;
 }

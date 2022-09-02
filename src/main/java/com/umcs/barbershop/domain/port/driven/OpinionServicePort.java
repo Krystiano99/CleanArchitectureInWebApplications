@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface OpinionServicePort {
     List<Opinion> getOpinions();
-    Opinion getOpinionById(UUID id);
-    Opinion addOpinion(Opinion opinion);
+    Opinion leaveOpinion(UUID customerId, int rate, String comment);
     Opinion deleteOpinionById(UUID id);
+    double getAverageRating();
 }

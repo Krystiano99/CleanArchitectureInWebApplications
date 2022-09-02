@@ -13,7 +13,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class OpinionInDatabaseAdapter implements OpinionRepositoryPort {
-
     private final OpinionRepository opinionRepository;
 
     public OpinionInDatabaseAdapter(OpinionRepository opinionRepository) {
@@ -26,7 +25,7 @@ public class OpinionInDatabaseAdapter implements OpinionRepositoryPort {
                 .map(opinionEntity -> new Opinion(
                         opinionEntity.getId(),
                         customerEntityToUser(opinionEntity.getCustomerEntity()),
-                        opinionEntity.getAssessment(),
+                        opinionEntity.getRate(),
                         opinionEntity.getComment()
                 ))
                 .collect(Collectors.toList());
@@ -38,12 +37,12 @@ public class OpinionInDatabaseAdapter implements OpinionRepositoryPort {
                 opinion.getId(),
                 customerToEntityUser(opinion.getCustomer()),
                 opinion.getComment(),
-                opinion.getAssessment()
+                opinion.getRate()
         ));
         return new Opinion(
                 result.getId(),
                 customerEntityToUser(result.getCustomerEntity()),
-                result.getAssessment(),
+                result.getRate(),
                 result.getComment()
         );
     }
@@ -59,7 +58,7 @@ public class OpinionInDatabaseAdapter implements OpinionRepositoryPort {
         return new Opinion(
                 result.get().getId(),
                 customerEntityToUser(result.get().getCustomerEntity()),
-                result.get().getAssessment(),
+                result.get().getRate(),
                 result.get().getComment()
         );
     }
@@ -70,7 +69,7 @@ public class OpinionInDatabaseAdapter implements OpinionRepositoryPort {
         return new Opinion(
                 opinionToDelete.getId(),
                 customerEntityToUser(opinionToDelete.getCustomerEntity()),
-                opinionToDelete.getAssessment(),
+                opinionToDelete.getRate(),
                 opinionToDelete.getComment()
         );
     }

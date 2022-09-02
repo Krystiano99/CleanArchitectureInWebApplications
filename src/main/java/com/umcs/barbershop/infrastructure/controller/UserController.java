@@ -15,7 +15,6 @@ import java.util.UUID;
 public class UserController {
     private final UserServicePort userServicePort;
 
-//    @Autowired
     public UserController(UserServicePort userServicePort) {
         this.userServicePort = userServicePort;
     }
@@ -28,9 +27,9 @@ public class UserController {
     public User getUserById(@PathVariable("userId") UUID userId) {
         return userServicePort.getUserById(userId);
     }
-    @GetMapping(path = "/role/{role}")
-    public List<User> getUsersByRole(@PathVariable("role") String role) {
-        return userServicePort.getUsersByRole(role);
+    @GetMapping(path = "/barber")
+    public List<User> getBarbers() {
+        return userServicePort.getBarbers();
     }
 
     @PostMapping

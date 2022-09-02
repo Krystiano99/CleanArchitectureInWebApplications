@@ -4,10 +4,12 @@ import com.umcs.barbershop.domain.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @Data
 public class OpinionDto {
-    User customer;
+    UUID customerId;
     String comment;
-    int assessment;
+    int rate;
 }

@@ -23,48 +23,21 @@ public class Visit {
     public UUID getId() {
         return id;
     }
-
     public void setId(UUID id) {
         this.id = id;
     }
-
     public Date getCreatedDate() {
         return createdDate;
     }
-
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
-
-    public Date getVisitDate() {
-        return visitDate;
-    }
-
-    public void setVisitDate(Date visitDate) {
-        this.visitDate = visitDate;
-    }
-
-    public Haircut getService() {
-        return haircut;
-    }
-
-    public void setService(Haircut haircut) {
-        this.haircut = haircut;
-    }
-
-    public User getBarber() {
-        return barber;
-    }
-
-    public void setBarber(User barber) {
-        this.barber = barber;
-    }
-
-    public User getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(User customer) {
-        this.customer = customer;
-    }
+    public Date getVisitDate() {return visitDate;}
+    public void setVisitDate(Date visitDate) {this.visitDate = visitDate; }
+    public Haircut getHaircut() {return haircut; }
+    public void setService(Haircut haircut) {this.haircut = haircut; }
+    public User getBarber() {return barber; }
+    public void setBarber(User barber) { this.barber = barber; }
+    public User getCustomer() { return customer; }
+    public void setCustomer(User customer) { this.customer = customer; }
 }
