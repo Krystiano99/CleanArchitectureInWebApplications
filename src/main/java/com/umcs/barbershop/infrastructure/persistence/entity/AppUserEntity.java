@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserEntity {
+public class AppUserEntity {
 
     @Id
     @GeneratedValue

@@ -29,5 +29,4 @@ public class VisitServiceAdapter implements VisitServicePort {
     public Visit scheduleVisit(UUID customerId, UUID barberId, UUID haircutId, Date visitDate) {
         return visitService.scheduleVisit(customerId, barberId, haircutId, visitDate);
     }
-
 }

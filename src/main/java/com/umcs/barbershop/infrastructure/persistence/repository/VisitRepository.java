@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface VisitRepository extends JpaRepository<VisitEntity, UUID> {
-    Optional<VisitEntity> findByUserEntity_Id(UUID id);
+//    Optional<VisitEntity> findByUserEntity_Id(UUID id);
 }

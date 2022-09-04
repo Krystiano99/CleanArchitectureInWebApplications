@@ -1,6 +1,5 @@
 package com.umcs.barbershop.infrastructure.dto;
 
-import com.umcs.barbershop.domain.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

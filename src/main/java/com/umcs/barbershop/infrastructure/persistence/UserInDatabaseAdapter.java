@@ -2,7 +2,7 @@ package com.umcs.barbershop.infrastructure.persistence;
 
 import com.umcs.barbershop.domain.model.User;
 import com.umcs.barbershop.domain.port.driving.UserRepositoryPort;
-import com.umcs.barbershop.infrastructure.persistence.entity.UserEntity;
+import com.umcs.barbershop.infrastructure.persistence.entity.AppUserEntity;
 import com.umcs.barbershop.infrastructure.persistence.repository.UserRepository;
 
 import java.util.List;
@@ -20,20 +20,20 @@ public class UserInDatabaseAdapter implements UserRepositoryPort {
     @Override
     public List<User> findAll() {
         return userRepository.findAll().stream()
-                .map(userEntity -> new User(
-                        userEntity.getId(),
-                        userEntity.getFirstName(),
-                        userEntity.getLastName(),
-                        userEntity.getEmail(),
-                        userEntity.getPhoneNumber(),
-                        userEntity.getRole()
+                .map(barbershopUserEntity -> new User(
+                        barbershopUserEntity.getId(),
+                        barbershopUserEntity.getFirstName(),
+                        barbershopUserEntity.getLastName(),
+                        barbershopUserEntity.getEmail(),
+                        barbershopUserEntity.getPhoneNumber(),
+                        barbershopUserEntity.getRole()
                 ))
                 .collect(Collectors.toList());
     }
 
     @Override
     public User addUser(User user) {
-        UserEntity result = userRepository.save(new UserEntity(
+        AppUserEntity result = userRepository.save(new AppUserEntity(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
@@ -46,7 +46,7 @@ public class UserInDatabaseAdapter implements UserRepositoryPort {
 
     @Override
     public User getUserById(UUID id) {
-        Optional<UserEntity> result = userRepository.findById(id);
+        Optional<AppUserEntity> result = userRepository.findById(id);
 
         if(result.isEmpty()) {
             return null;
@@ -57,21 +57,21 @@ public class UserInDatabaseAdapter implements UserRepositoryPort {
 
     @Override
     public User updateUser(UUID id, User user) {
-        UserEntity userToUpdate = userRepository.findById(id).get();
+        AppUserEntity userToUpdate = userRepository.findById(id).get();
 
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setRole(user.getRole());
-        UserEntity result = userRepository.save(userToUpdate);
+        AppUserEntity result = userRepository.save(userToUpdate);
 
         return new User(result.getId(), result.getFirstName(), result.getLastName(), result.getEmail(),
                 result.getPhoneNumber(), result.getRole());
     }
     @Override
     public User deleteUserById(UUID id) {
-        UserEntity userToDelete = userRepository.findById(id).get();
+        AppUserEntity userToDelete = userRepository.findById(id).get();
         userRepository.deleteById(id);
         return new User(userToDelete.getId(), userToDelete.getFirstName(), userToDelete.getLastName(), userToDelete.getEmail(), userToDelete.getPhoneNumber(), userToDelete.getRole());
     }

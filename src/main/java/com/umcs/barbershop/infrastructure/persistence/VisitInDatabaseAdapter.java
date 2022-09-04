@@ -5,7 +5,7 @@ import com.umcs.barbershop.domain.model.User;
 import com.umcs.barbershop.domain.model.Visit;
 import com.umcs.barbershop.domain.port.driving.VisitRepositoryPort;
 import com.umcs.barbershop.infrastructure.persistence.entity.HaircutEntity;
-import com.umcs.barbershop.infrastructure.persistence.entity.UserEntity;
+import com.umcs.barbershop.infrastructure.persistence.entity.AppUserEntity;
 import com.umcs.barbershop.infrastructure.persistence.entity.VisitEntity;
 import com.umcs.barbershop.infrastructure.persistence.repository.VisitRepository;
 
@@ -20,7 +20,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
     public VisitInDatabaseAdapter(VisitRepository visitRepository) {
         this.visitRepository = visitRepository;
     }
-
     @Override
     public List<Visit> findAll() {
         return visitRepository.findAll().stream()
@@ -28,9 +27,9 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                         visitEntity.getId(),
                         visitEntity.getCreatedDate(),
                         visitEntity.getVisitDate(),
-                        serviceEntityToService(visitEntity.getHaircutEntity()),
-                        customerEntityToUser(visitEntity.getCustomerEntity()),
-                        barberEntityToUser(visitEntity.getUserEntity())
+                        haircutEntityToHaircut(visitEntity.getHaircutEntity()),
+                        barberEntityToUser(visitEntity.getBarberEntity()),
+                        customerEntityToUser(visitEntity.getCustomerEntity())
                 ))
                 .collect(Collectors.toList());
     }
@@ -41,21 +40,51 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 visit.getId(),
                 visit.getCreatedDate(),
                 visit.getVisitDate(),
-                serviceToServiceEntity(visit.getHaircut()),
-                customerToEntityUser(visit.getCustomer()),
-                barberToEntityUser(visit.getBarber())
+                haircutToHaircutEntity(visit.getHaircut()),
+                barberToEntityUser(visit.getBarber()),
+                customerToEntityUser(visit.getCustomer())
         ));
         return new Visit(result.getId(),
                 result.getCreatedDate(),
                 result.getVisitDate(),
-                serviceEntityToService(result.getHaircutEntity()),
-                customerEntityToUser(result.getCustomerEntity()),
-                barberEntityToUser(result.getUserEntity())
+                haircutEntityToHaircut(result.getHaircutEntity()),
+                barberEntityToUser(result.getBarberEntity()),
+                customerEntityToUser(result.getCustomerEntity())
         );
     }
 
-    private UserEntity barberToEntityUser(User barber) {
-        return new UserEntity(
+    @Override
+    public Visit deleteVisitById(UUID id) {
+        VisitEntity visitToDelete = visitRepository.findById(id).get();
+        visitRepository.deleteById(id);
+        return new Visit(visitToDelete.getId(),
+                visitToDelete.getCreatedDate(),
+                visitToDelete.getVisitDate(),
+                haircutEntityToHaircut(visitToDelete.getHaircutEntity()),
+                barberEntityToUser(visitToDelete.getBarberEntity()),
+                customerEntityToUser(visitToDelete.getCustomerEntity())
+        );
+    }
+
+    @Override
+    public Visit getVisitById(UUID id) {
+        Optional<VisitEntity> result = visitRepository.findById(id);
+
+        if (result.isEmpty()) {
+            return null;
+        }
+
+        return new Visit(result.get().getId(),
+                result.get().getCreatedDate(),
+                result.get().getVisitDate(),
+                haircutEntityToHaircut(result.get().getHaircutEntity()),
+                barberEntityToUser(result.get().getBarberEntity()),
+                customerEntityToUser(result.get().getCustomerEntity())
+        );
+    }
+
+    private AppUserEntity barberToEntityUser(User barber) {
+        return new AppUserEntity(
                 barber.getId(),
                 barber.getFirstName(),
                 barber.getLastName(),
@@ -65,8 +94,8 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         );
     }
 
-    private UserEntity customerToEntityUser(User customer) {
-        return new UserEntity(
+    private AppUserEntity customerToEntityUser(User customer) {
+        return new AppUserEntity(
                 customer.getId(),
                 customer.getFirstName(),
                 customer.getLastName(),
@@ -76,7 +105,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         );
     }
 
-    private User customerEntityToUser(UserEntity customerEntity) {
+    private User customerEntityToUser(AppUserEntity customerEntity) {
         return new User(
                 customerEntity.getId(),
                 customerEntity.getFirstName(),
@@ -87,7 +116,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         );
     }
 
-    private User barberEntityToUser(UserEntity barberEntity) {
+    private User barberEntityToUser(AppUserEntity barberEntity) {
         return new User(
                 barberEntity.getId(),
                 barberEntity.getFirstName(),
@@ -98,36 +127,7 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         );
     }
 
-    public Visit getVisitById(UUID id) {
-       Optional<VisitEntity> result = visitRepository.findById(id);
-
-        if (result.isEmpty()) {
-            return null;
-        }
-
-        return new Visit(result.get().getId(),
-                result.get().getCreatedDate(),
-                result.get().getVisitDate(),
-                serviceEntityToService(result.get().getHaircutEntity()),
-                customerEntityToUser(result.get().getCustomerEntity()),
-                barberEntityToUser(result.get().getUserEntity())
-                );
-    }
-
-    @Override
-    public Visit deleteVisitById(UUID id) {
-        VisitEntity visitToDelete = visitRepository.findById(id).get();
-        visitRepository.deleteById(id);
-        return new Visit(visitToDelete.getId(),
-                visitToDelete.getCreatedDate(),
-                visitToDelete.getVisitDate(),
-                serviceEntityToService(visitToDelete.getHaircutEntity()),
-                customerEntityToUser(visitToDelete.getCustomerEntity()),
-                barberEntityToUser(visitToDelete.getUserEntity())
-                );
-    }
-
-    private Haircut serviceEntityToService(HaircutEntity haircutEntity) {
+    private Haircut haircutEntityToHaircut(HaircutEntity haircutEntity) {
         return new Haircut(
                 haircutEntity.getId(),
                 haircutEntity.getName(),
@@ -135,12 +135,11 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
         );
     }
 
-    private HaircutEntity serviceToServiceEntity(Haircut haircut) {
+    private HaircutEntity haircutToHaircutEntity(Haircut haircut) {
         return new HaircutEntity(
                 haircut.getId(),
                 haircut.getName(),
                 haircut.getPrice()
         );
     }
-
 }

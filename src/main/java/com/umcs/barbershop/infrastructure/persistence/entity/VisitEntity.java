@@ -25,9 +25,9 @@ public class VisitEntity {
     @OneToOne
     private HaircutEntity haircutEntity;
     @OneToOne
-    private UserEntity userEntity;
+    private AppUserEntity barberEntity;
     @OneToOne
-    private UserEntity customerEntity;
+    private AppUserEntity customerEntity;
 
 
 }

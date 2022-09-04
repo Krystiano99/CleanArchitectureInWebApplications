@@ -33,8 +33,6 @@ public class VisitController {
 
     @PostMapping(path = "/cancel")
     public Visit cancelVisit(@RequestBody VisitDto visitDto) {
-        return visitServicePort.cancelVisit(visitDto.getId(),visitDto.getCustomerId(), visitDto.getBarberId());
+        return visitServicePort.cancelVisit(visitDto.getId(), visitDto.getBarberId(), visitDto.getCustomerId());
     }
-
-
 }

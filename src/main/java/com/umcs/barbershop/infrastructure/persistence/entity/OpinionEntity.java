@@ -16,7 +16,7 @@ public class OpinionEntity {
     @GeneratedValue
     private UUID id;
     @OneToOne
-    private UserEntity customerEntity;
+    private AppUserEntity customerEntity;
     private String comment;
     private int rate;
 }

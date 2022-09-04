@@ -4,7 +4,7 @@ import com.umcs.barbershop.domain.model.Opinion;
 import com.umcs.barbershop.domain.model.User;
 import com.umcs.barbershop.domain.port.driving.OpinionRepositoryPort;
 import com.umcs.barbershop.infrastructure.persistence.entity.OpinionEntity;
-import com.umcs.barbershop.infrastructure.persistence.entity.UserEntity;
+import com.umcs.barbershop.infrastructure.persistence.entity.AppUserEntity;
 import com.umcs.barbershop.infrastructure.persistence.repository.OpinionRepository;
 
 import java.util.List;
@@ -74,8 +74,8 @@ public class OpinionInDatabaseAdapter implements OpinionRepositoryPort {
         );
     }
 
-    private UserEntity customerToEntityUser(User customer) {
-        return new UserEntity(
+    private AppUserEntity customerToEntityUser(User customer) {
+        return new AppUserEntity(
                 customer.getId(),
                 customer.getFirstName(),
                 customer.getLastName(),
@@ -85,7 +85,7 @@ public class OpinionInDatabaseAdapter implements OpinionRepositoryPort {
         );
     }
 
-    private User customerEntityToUser(UserEntity customerEntity) {
+    private User customerEntityToUser(AppUserEntity customerEntity) {
         return new User(
                 customerEntity.getId(),
                 customerEntity.getFirstName(),

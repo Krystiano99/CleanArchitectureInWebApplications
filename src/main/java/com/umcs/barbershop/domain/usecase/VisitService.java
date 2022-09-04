@@ -61,7 +61,7 @@ public class VisitService {
         return addVisit(new Visit(null, new Date(), visitDate, haircut, users.get("barber"), users.get("customer")));
     }
 
-    public Visit cancelVisit(UUID visitId, UUID customerId, UUID barberId) {
+    public Visit cancelVisit(UUID visitId, UUID barberId, UUID customerId) {
         Visit visit = getVisitById(visitId);
         if(visit.getId() != visitId) {
             throw new VisitNotFoundException("Visit not found.");
@@ -69,10 +69,10 @@ public class VisitService {
 
         Map<String, User> users = validateVisitUsers(customerId, barberId);
 
-        if(users.get("customer").getId() != customerId) {
+        if(!users.get("customer").getId().equals(customerId)) {
             throw new UserNotAssociatedException("Customer is not associated with Visit");
         }
-        if(users.get("barber").getId() != barberId) {
+        if(!users.get("barber").getId().equals(barberId)) {
             throw new UserNotAssociatedException("Barber is not associated with Visit");
         }
 
