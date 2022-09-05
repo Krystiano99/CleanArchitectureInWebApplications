@@ -33,7 +33,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 ))
                 .collect(Collectors.toList());
     }
-
     @Override
     public Visit addVisit(Visit visit) {
         VisitEntity result = visitRepository.save(new VisitEntity(
@@ -52,7 +51,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 customerEntityToUser(result.getCustomerEntity())
         );
     }
-
     @Override
     public Visit deleteVisitById(UUID id) {
         VisitEntity visitToDelete = visitRepository.findById(id).get();
@@ -65,7 +63,6 @@ public class VisitInDatabaseAdapter implements VisitRepositoryPort {
                 customerEntityToUser(visitToDelete.getCustomerEntity())
         );
     }
-
     @Override
     public Visit getVisitById(UUID id) {
         Optional<VisitEntity> result = visitRepository.findById(id);
